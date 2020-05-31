@@ -1,0 +1,104 @@
+
+<div class="show-question">
+  <div id="question">
+    <div id="question-title">
+      <h2><%= @question.title %></h2>
+    </div>
+    
+    <div id="question-rate">
+    </div>
+    
+    <div id="question-body">
+      <p><%= @question.body %></p>
+    </div>
+
+    <div id="question-autor">
+      <h4>By: <%= @question.user.username %></h4>
+    </div>
+  
+  </div>
+
+
+  
+  <div id="create-answer">
+    <div id="answer-form-container">
+      <h3>Enter You Answer:</h3>
+      <%= render "answer_form.html", Map.put(assigns, :action, Routes.question_path(@conn, :add_answer, @question.id)) %>
+    </div>
+    <button id="create-answer-button">Answer</button>
+  </div>
+  <div id="answers">
+    <h3>Answers</h3>
+    <hr>
+    <%= for answer <- Enum.sort(@question.answers, &(&1.score >= &2.score)) do %>
+      <% status = current_user_liked?(@current_user.id, answer) %>
+      <div id='answer-<%= answer.id %>'>
+        <div class="question-answer">
+          <div class="question-answer-title">
+            <p><%= answer.title %></p>
+          </div>
+
+          <form 
+            class="question-answer-rate"
+            answer_id="<%= answer.id %>"
+            question_id="<%= @question.id %>"
+            user_id="<%= @current_user.id %>"
+            status="<%= status %>"
+          >
+                  
+            <input
+              class="rate-answer like-answer" 
+              action="like"
+              type="image" 
+              src='<%= Routes.static_path(@conn, get_like_src(status))%>'
+              csrf="<%= Plug.CSRFProtection.get_csrf_token() %>" 
+            >
+            <input 
+              class="rate-answer dislike-answer" 
+              action="dislike"
+              type="image" 
+              src='<%= Routes.static_path(@conn, get_dislike_src(status))%>'
+              csrf="<%= Plug.CSRFProtection.get_csrf_token() %>" 
+            >
+
+            <div class="score-container">
+              <p id='score-p-<%= answer.id %>'> <%= answer.score %></p>
+            </div>
+              
+          </form>
+
+          <div class="question-answer-body">
+            <p><%= answer.body %></p>
+          </div>
+          
+          <div class="question-answer-author">
+            by <%= link(answer.user.username,
+              to: Routes.user_path(@conn, :show, answer.user.id),
+              method: :get)%>
+            
+          </div>
+          
+          <div class="question-answer-buttons">
+
+            <%= if(current_user_is_author(answer, @current_user.id)) do%>
+              <%= button("Edit", to: Routes.answer_path(@conn, :edit, answer), method: :get)%>
+
+              <button class="delete-answer"
+                csrf="<%= Plug.CSRFProtection.get_csrf_token() %>" 
+                answer_id="<%= answer.id %>">
+                Delete
+              </button>
+            <% end %>
+          </div>
+          
+        </div>
+        <hr/>
+      </div>
+    <% end %>
+
+  </div>
+
+  <span><%= link "Edit", to: Routes.question_path(@conn, :edit, @question) %></span>
+  <span><%= link "Back", to: Routes.question_path(@conn, :index) %></span>
+
+</div>

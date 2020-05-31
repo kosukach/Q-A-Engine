@@ -1,0 +1,133 @@
+.show-question{
+    margin-left: 16rem;
+    margin-right: 16rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #d5e2c9;
+}
+#question{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) ;
+    grid-template-rows: 3rem 1fr 3rem;
+    align-content: space-between;
+    grid-template-areas:
+    "title   title   title   title   rate"
+    "body    body    body    body    body"
+    "author  author  author  author  author"
+}
+
+#question-title{
+    grid-area: title;
+}
+
+#question-rate{
+    grid-area: rate;
+}
+#question-body{
+    grid-area: body;
+    padding-left: 1rem;
+}
+#question-author{
+    grid-area: author;
+}
+#answer-form-container{
+    display: none;
+}
+.answer-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3rem 1fr 2rem;
+    grid-row-gap: 0.5rem;
+    grid-column-gap: 0.3rem;
+    grid-template-areas:
+    "title  title  title title"
+    "body   body   body  body"
+    "submit cancel none  none"
+}
+#answer-form-title{
+    grid-area: title;
+}
+#answer-form-body{
+    grid-area: body;
+}
+#answer-form-submit{
+    grid-area: submit;
+}
+
+.answer-form-component{
+    display: grid;
+    grid-template-rows: 1.2rem 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "text"
+    "input"
+}
+.answer-form-component-text{
+    grid-area: text;
+}
+
+.answer-form-component-input{
+    grid-area: input;
+}
+
+
+.question-answer{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) ;
+    grid-template-rows: 3rem 1fr 3rem;
+    align-content: space-between;
+    grid-template-areas:
+    "title   title   title   title   rate"
+    "body    body    body    body    body"
+    "author  author  author  author  buttons"
+}
+
+.question-answer-author{
+    grid-area: author;
+    
+}
+
+.question-answer-author a{
+    text-decoration: none;
+    color: #222222;
+    font-weight: bold;
+}
+.question-answer-rate{
+    grid-area: rate;
+    justify-self: end;
+    display: grid;
+    grid-template-rows: 1rem 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 0.2rem;
+    grid-template-areas:
+    "like   score"
+    "dislike score"
+}
+
+.rate-answer{
+    width:1rem;
+    height: 1rem;
+    outline: none;
+}
+.like-answer{
+    grid-area: like;
+}
+.dislike-answer{
+    grid-area: dislike;
+}
+.score-container{
+    grid-area: score;
+    align-self: center;
+    justify-self: center;
+}
+.question-answer-title{
+    grid-area: title;
+    font-weight: bold;
+}
+.question-answer-body{
+    grid-area: body;
+    padding-left: 1rem;
+}
+.question-answer-buttons{
+    grid-area: buttons
+}

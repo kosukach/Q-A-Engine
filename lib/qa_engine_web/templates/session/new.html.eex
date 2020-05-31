@@ -1,0 +1,16 @@
+<div>
+    <h1>Sing in</h1>
+
+
+    <%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
+    
+    <div>
+    <%= text_input f, :email, placeholder: "Email", class: "form-control"%>
+    </div>
+    <div>
+    <%= password_input f, :password, placeholder: "Password", class: "form-control"%>
+    </div>
+        
+    <%= submit "Log in"%>
+    <% end %>
+</div>
