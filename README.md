@@ -1,5 +1,8 @@
 # QaEngine
 
+Forum app in elixir with implemented post/comment and like/dislike interface. Work still in progress.
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
